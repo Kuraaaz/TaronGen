@@ -1,6 +1,6 @@
 const discord = require('discord.js');
 const fs = require('fs');
-const { token, prefix, gen_channels, VIP_NB, VIP_role } = require('../config.json');
+const { token, prefix, gen_channels, VIP_NB, VIP_role, owner_ROLE } = require('../config.json');
 const r = require('sync-request');
 const cooldowns = new Map(); // Map pour stocker les timestamps des utilisateurs
 
@@ -21,17 +21,20 @@ module.exports = {
             .setTitle("Plus aucun stocks pour le service **" + args[1] + "**")
             .setColor(0x303135);
 
-        // Cooldown de 3 minutes
-        const cooldownTime = 3 * 60 * 1000; // 3 minutes en millisecondes
-        const now = Date.now();
-        const userCooldown = cooldowns.get(message.author.id);
+        // Vérifie si l'utilisateur a le rôle owner_ROLE
+        if (!message.member.roles.cache.some(role => role.id === owner_ROLE)) {
+            // Cooldown de 3 minutes pour les utilisateurs sans owner_ROLE
+            const cooldownTime = 3 * 60 * 1000; // 3 minutes en millisecondes
+            const now = Date.now();
+            const userCooldown = cooldowns.get(message.author.id);
 
-        if (userCooldown && now < userCooldown + cooldownTime) {
-            const timeLeft = Math.round((userCooldown + cooldownTime - now) / 1000);
-            return message.reply(`Vous devez attendre ${timeLeft} secondes avant de pouvoir utiliser à nouveau la commande.`);
+            if (userCooldown && now < userCooldown + cooldownTime) {
+                const timeLeft = Math.round((userCooldown + cooldownTime - now) / 1000);
+                return message.reply(`Vous devez attendre ${timeLeft} secondes avant de pouvoir utiliser à nouveau la commande.`);
+            }
+
+            cooldowns.set(message.author.id, now); // Définir le nouveau timestamp pour l'utilisateur
         }
-
-        cooldowns.set(message.author.id, now); // Définir le nouveau timestamp pour l'utilisateur
 
         if (!fs.existsSync(`./stocks/${args[1]}.txt`)) {
             return message.channel.send("Service introuvable dans les stocks ou n'existe pas");
