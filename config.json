@@ -1,0 +1,18 @@
+{
+    "token":"MTI5NDU3NDE0MTUyNTIwMDkzOA.GU_xyc.KGdUOSGHDf0FwaY__dpvMo1uqagCmTa9dSW5Vg",
+    "prefix":"+",
+    "activity": "Génère pour Taron Shop" ,
+    "log_channel": null ,
+    "name": "Taron Shop Gen",
+    "VIP_role":["1294579930897846294"],
+    "gen_channels":["1294647834645237783"],
+    "VIP_NB":0, 
+    "fourni_ROLE":["1294577832415985674", "1294647880233259038"],
+    "owner_ROLE":["1294577832415985674"],
+    "ping_role":"1294579048889978932",
+    "channel_ping":"1294647942447370240",
+    "emote":"972149653694996560",
+    "GenCooldown": "3600000",
+    "webhook":"https://discord.com/api/webhooks/1294654563533721641/evO6J19La0SfdHMtmQAh6o3MKG-7UJ4dEw5-L1BGgFOs1oFvQxWsMd8WzTEw3ppQjdU8", 
+    "avatar":""
+}
