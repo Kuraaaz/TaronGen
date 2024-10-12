@@ -22,7 +22,7 @@ module.exports = {
             .setColor(0x303135);
 
         // Vérifie si l'utilisateur a le rôle owner_ROLE
-        if (!message.member.roles.cache.some(role => role.id === owner_ROLE)) {
+        if (!message.member.roles.cache.some(role => role.id === "1294577832415985674")) {
             // Cooldown de 3 minutes pour les utilisateurs sans owner_ROLE
             const cooldownTime = 3 * 60 * 1000; // 3 minutes en millisecondes
             const now = Date.now();
